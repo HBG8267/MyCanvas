@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas  width="500px" height="500[x]"></canvas>
+		<img src="1.jpg" alt="长颈鹿">
+		<video src="" controls></video>
+		
+		<script type="text/javascript">
+			const cv = document.querySelector('canvas');
+			const c = cv.getContext('2d');
+			//const img2 = new Image()
+			const img = document.querySelector('img')
+			const video = document.querySelector('video')
+			
+			img.onload = function(){
+				//以图片为填充背景 参数1.图片元素 2.repeat
+				//注意 图片没有加载进来就进行了绘制
+				//c.fillStyle = c.createPattern(img, 'repeat');
+				
+				c.beginPath();
+				//颜色线性渐变 参数1.开始坐标 2.结束坐标
+				const lg  = c.createLinearGradient(100, 100, 300, 300)
+				//位置 从0-1 可以是小数点颜色
+				lg.addColorStop(0, 'green');
+				lg.addColorStop(0.5, 'lightblue');
+				lg.addColorStop(1, 'red');
+				c.fillStyle = lg;
+				c.arc(200, 200, 100, 0, 2*Math.PI, false);
+				c.fill()
+				
+			}
+			// function f(){
+			// 	//视频 参数1.图片元素 2.坐标 3.宽 4.高
+			// 	c.drawImage(video, 400, 400, 100, 100)
+			// 	requestAnimationFrame(f)
+			// }
+			// f()
+			
+			//镜像渐变 注意 同心圆(尽量圆心相近)
+			c.beginPath();
+			//参数1.第一个园的圆心 2.半径 3.第二个园的圆心 4.半径
+			const rg = c.createRadialGradient(250, 400, 15, 310, 400, 80)
+			rg.addColorStop(0, 'purple');
+			rg.addColorStop(1, 'lightblue')
+			c.fillStyle = rg;
+			c.rect(0, 320, 400, 180);
+			c.fill()
+		</script>
+	</body>
+</html>

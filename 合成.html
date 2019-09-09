@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		canvas{
+			border:1px solid #666;
+		}
+	</style>
+	<body>
+		<canvas width = '600px' height = '600px'></canvas>
+		<script>
+			const cv = document.querySelector('canvas');
+			const c = cv.getContext('2d');
+			
+			// c.beginPath();
+			// c.fillStyle = 'blue';
+			// c.rect(100, 100, 100, 100);
+			// c.fill();
+			// 
+			// 
+			// //写在两图像间
+			// //合成图像 参数 
+			// //默认 source-over在目标图像(先)上显示源图像(后)
+			// //source-atop 在目标图像之外隐藏掉 并且显示源图像
+			// //source-in 只显示源图像 在两者交集部分
+			// //source-out 只显示在目标图像外的源图像
+			// //destination-over 目标图像和源图像互换
+			// //destination-atop 
+			// c.globalCompositeOperation = "source-atop"
+			// 
+			// c.beginPath();
+			// c.fillStyle = 'red';
+			// c.arc(150, 200, 50, 0, 2*Math.PI);
+			// c.fill()
+			// //下载图像 依赖于a标签
+			// // const img = document.createElement('img');
+			// // img.src = cv.toDataURL()
+			// // document.body.appendChild(img)
+			// 
+			// // const a = document.createElement('a');
+			// // cv.toBlob(function(blob){
+			// // 	a.download = 'blob.png';
+			// // 	a.href = window.URL.createObjectURL(blob);
+			// // 	//a.click()
+			// // })
+
+			//剪裁
+			c.rect(50, 250, 50 ,50);//选择的区域
+			c.clip()
+			c.beginPath();
+			c.lineWidth = 50;
+			c.arc(100, 300, 50, 0, 2*Math.PI); //被剪裁的图形
+			c.stroke()
+		</script>
+	</body>
+</html>

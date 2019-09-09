@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas width='500' height='500'></canvas>
+		<script>
+			const cv = document.querySelector('canvas');
+			const c = cv.getContext('2d');
+			function f(){
+				const date = new Date();
+				//console.log(date.toDateString()+ ','+date.toLocaleTimeString())
+				//画渐变背景
+				c.beginPath();
+				c.shadowBlur = 10;
+				c.shadowColor = '#00ffff'
+				const rg = c.createRadialGradient(250, 250, 5, 250, 250, 300)
+				rg.addColorStop(0, '#03303a');
+				rg.addColorStop(1, 'black');
+				c.fillStyle = rg;
+				c.rect(0, 0, 500, 500);
+				c.fill();
+				
+				const ms = date.getMilliseconds()/1000;
+				const sec = date.getSeconds() + ms;
+				const min = date.getMinutes() + sec/60;
+				const hor = date.getHours()%12 + min/60;
+				//console.log(hor,min,sec,ms)
+				c.beginPath();
+				c.lineWidth = 17;
+				c.strokeStyle = '#00ffff'
+				c.arc(250, 250, 200, -1/2*Math.PI, (30*hor-90)*Math.PI/180)
+				c.stroke();
+				c.beginPath();
+				c.arc(250, 250, 170, -1/2*Math.PI, (6*min-90)*Math.PI/180)
+				c.stroke();
+				c.beginPath();
+				c.arc(250, 250, 140, -1/2*Math.PI, (5*sec-90)*Math.PI/180)
+				c.stroke();
+				
+				c.beginPath();
+				c.font = '20px 微软雅黑'
+				c.fillStyle = '#00ffff';
+				c.fillText(date.toDateString(), 170 ,240)
+				c.fillText(date.toLocaleTimeString()+ ':' + 1000*ms, 173 ,270)
+				requestAnimationFrame(f)
+			}
+			f()
+		</script>
+	</body>
+</html>

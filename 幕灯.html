@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		body{
+			margin:0;
+			background-image: url('1.jpg');
+		}
+	</style>
+	<body>
+		<canvas></canvas>
+		<script>
+			const cv = document.querySelector('canvas');
+			const c = cv.getContext('2d');
+			let w,h;
+			let x,y;
+			w = window.innerWidth;
+			h = window.innerHeight;
+			cv.width = w;
+			cv.height = h;
+			
+			function draw({clientX = w/2, clientY =h/2}){
+				c.save();
+				c.clearRect(0, 0 , w, h);
+				c.beginPath();
+				c.fillStyle = '#000'
+				c.rect(0, 0, w, h);
+				c.fill();
+				x = clientX;
+				y = clientY;
+				c.globalCompositeOperation = "destination-out";
+				c.beginPath();
+				const rg = c.createRadialGradient(x, y, 1, x, y, 100);
+				rg.addColorStop(0, 'rgba(0, 0, 0, 1)');
+				rg.addColorStop(0.8, 'rgba(0, 0, 0, 1)');
+				rg.addColorStop(1, 'rgba(0, 0, 0, .3)')
+				c.fillStyle = rg;
+				c.arc(x, y, 100, 0, 2*Math.PI);
+				c.fill();
+				c.restore()
+			}
+			draw({});
+			
+			let time = new Date();
+			cv.onmousemove = function(e){
+				draw(e)
+			}
+		</script>
+	</body>
+</html>

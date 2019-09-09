@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas width = '1000px' height = '1000px'></canvas>
+		<script>
+			const cv = document.querySelector('canvas');
+			const c = cv.getContext('2d');
+			//文字样式
+			//必须要包含两个参数 1.大小 2.字体
+			c.font = '30px 微软雅黑'
+			c.strokeStyle = 'red'
+			c.fillStyle = 'lightblue'
+			c.textAlign = 'center' //左右 
+			c.textBaseline = 'middle' //上下 top middle button
+			c.shadowOffsetX = 20;
+			c.shadowOffsetY = 10; 
+			c.shadowColor = 'rgb(110, 110, 110, 0.3)'
+			c.shadowBlur = 3; //羽化值（模糊度)
+			//文字 空心stroke  实心fill
+			//参数 1.文字 2.位置(默认基线以下划线对齐)
+			c.strokeText('狗蛋', 50, 50 )
+			c.fillText('大锤', 50, 100)
+		</script>
+	</body>
+</html>

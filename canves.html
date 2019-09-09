@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		/* canvas{
+			width:1000px;
+			height:1000px;
+		} */
+	</style>
+	<body>
+		<!-- <p>canves 1.游戏(coco)   2.图表(antv)  3. 上传头像剪裁</p> -->
+		设置canvas的大小样式1.在标签内 2.用js   注意在style中会等比例缩放画的元素
+		<canvas width = '1000px' height = '1000px'></canvas>
+		<script>
+			const cv = document.querySelector('canvas')
+			//新建图层
+			const c = cv.getContext('2d')
+			// 图形都是依据坐标 canvas标签左上角(0，0)
+			//矩形 左上角坐标 长 宽 strokeRect
+			//c.strokeRect(0, 0, 100, 200)
+			//以什么方式画 默认填充
+			//c.fill()//填充
+			//c.stroke()//描边 
+			//园 圆心坐标 半径 从多少度开始(0度在三点钟方向) 到多少度  顺时针false或逆时针true
+			c.arc(200, 100, 100, Math.PI, Math.PI/2, false)
+			c.fillStyle = 'lightgreen'
+			//边框线 直接写数字 不用px 
+			// 线宽从中点开始 左边一半 右边一半 开始画 0.5像素或扩展 2和1实际宽度相同 但偶数倍颜色深一点
+			c.lineWidth = 40; 
+			c.fill()
+			// 直线
+			c.moveTo(0,10)
+			c.lineTo(40,10)
+			c.strokeStyle = 'rgba(100, 100, 100, .5)'
+			c.stroke()
+		</script>
+	</body>
+</html>

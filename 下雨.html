@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		body{
+			margin:0;
+			overflow:hidden;
+		}
+	</style>
+	<body>
+		<canvas></canvas>
+		<script>
+			const cv = document.querySelector('canvas');
+			const c = cv.getContext('2d');
+			let w,h;
+			let arr = new Array(400);
+			let timeId;
+			function draw(){
+				w = window.innerWidth;
+				h = window.innerHeight;
+				cv.width = w;
+				cv.height = h;
+				c.beginPath();
+				c.fillStyle = 'rgb(6, 29, 44)';
+				c.rect(0, 0, w, h);
+				c.fill();
+				console.log(w, h)
+				arr.splice(0, arr.length) //清除由于屏幕调正重复添加的数组
+				for(let i = 0; i < 400; i++){
+					let x = Math.random() * w;
+					let y = Math.random() * h;
+					let dx = Math.random() * 3;
+					let dy = Math.random() * 15 + 5;
+					arr.push({x, y, dx, dy});
+				}
+				timeId = setInterval(f, 100)
+				function f(){
+					c.clearRect(0, 0 , w, h);
+					c.beginPath();
+					c.fillStyle = 'rgb(6, 29, 44)';
+					c.rect(0, 0, w, h);
+					c.fill();
+					//console.log('清除')
+					arr.forEach(function(val){
+						c.beginPath();
+						c.strokeStyle = 'rgba(174, 194, 224, .5)';
+						c.moveTo(val.x, val.y);
+						c.lineTo(val.x+val.dx, val.y+val.dy);
+						c.stroke();
+						//console.log('绘画')
+						val.x += val.dx;
+						val.y += val.dy;
+						if(val.x > w) val.x = Math.random() * w;
+						if(val.y > h) val.y = -20
+					})
+				}
+			}
+			draw()
+			window.onresize = function(){
+				clearInterval(timeId)
+				draw();
+			}
+		</script>
+	</body>
+</html>
